@@ -18,13 +18,13 @@ def file_input(file):
 
 def kb_input():
     my_input = input('write input: ')
-    file_in = open("input.txt", "wb")
+    file_in = open("files/input.txt", "wb")
 
     for i in range(len(my_input)):
         file_in.write(bytes(my_input[i], 'ascii'))
 
 def rand_input():
-    file_in = open("input.txt", "wb")
+    file_in = open("files/input.txt", "wb")
     amount = int(input('amount of records: '))
     for _ in range(amount):
         for i in range(RECORD_SIZE):
@@ -57,9 +57,9 @@ if __name__ == '__main__':
     liczba_faz = 0
     while not_sorted:
         # faza in
-        file_in = open("input.txt", "rb")
-        file_b = open("B.txt", "wb")
-        file_c = open("C.txt", "wb")
+        file_in = open("files/input.txt", "rb")
+        file_b = open("files/B.txt", "wb")
+        file_c = open("files/C.txt", "wb")
         A = Buffer(file_in, file_b, file_c, None, 'A')
         B = Buffer(file_in, file_b, file_c, None, 'B')
         C = Buffer(file_in, file_b, file_c, None, 'C')
@@ -88,10 +88,10 @@ if __name__ == '__main__':
 
         # faza out
         #file_in = open("out.txt", "wb")
-        file_in = open("input.txt", "wb")
-        file_b = open("B.txt", "rb")
-        file_c = open("C.txt", "rb")
-        file_value = open("value.txt", "w+")
+        file_in = open("files/input.txt", "wb")
+        file_b = open("files/B.txt", "rb")
+        file_c = open("files/C.txt", "rb")
+        file_value = open("files/value.txt", "w+")
         B_out = Buffer(file_in, file_b, file_c, None, 'B_out')
         C_out = Buffer(file_in, file_b, file_c, None, 'C_out')
         D = Buffer(file_in, file_b, file_c, file_value, 'D')
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         C_out.write_page()
         if C_out.get_size() == 0:
             not_sorted = False  # posortowane
-            copyfile('B.txt', 'input.txt')
+            copyfile('files/B.txt', 'files/input.txt')
         else:
             B_out.write_page()
         last_record_val_B = 0
